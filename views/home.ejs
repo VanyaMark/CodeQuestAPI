@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pregunta del Día</title>
-  <!-- Tailwind CSS for styling -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Fonts preloading and custom font links -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Karla&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../public/style.css">
-</head>
-<body class="bg-black flex items-center justify-center h-screen"style="font-family: 'Oxanium', sans-serif">
+  <title>CodeQuestAPI</title>
+  <%- include('./partials/head.ejs') %>
+
+<body class="bg-black flex items-center justify-center 
+h-screen"style="font-family: 'Oxanium', sans-serif">
   <!-- Main container with Tailwind styles for layout and custom border and background colors -->
+  <div id="nav-bar">
+    <%- include('./partials/nav.ejs') %>
+  </div>
+
   <div class="border-4 border-primaryGreen bg-backgroundGreen p-6 rounded-lg shadow-lg text-center">
     <h1 class="text-2xl font-bold mb-4 text-white" style="font-family: 'Press Start 2P', sans-serif">DAILY PROGRAMMING QUESTION</h1>
 

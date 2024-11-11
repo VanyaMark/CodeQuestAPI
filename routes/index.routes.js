@@ -7,7 +7,7 @@ router.get('/template-form', indexControllers.getFormTemplate)
 
 router.get('/export-questions', indexControllers.getTemplateQuestions);
 
-
+router.get('/daily-question', indexControllers.getDailyQuestion)
 
 
 

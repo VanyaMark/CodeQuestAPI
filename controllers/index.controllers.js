@@ -1,7 +1,8 @@
 const xlsx = require("xlsx");
 const fs = require("fs");
 const path = require("path");
-const { getRandomQuestion } = require('../services/question.services');
+const { getRandomQuestion, getRandomQuestionWithoutCodeExamples } = require('../services/question.services');
+const { shuffleArray } = require('../utils/utils')
 
 const getFormTemplate = async (req, res) => {
 	res.render("template-form", {});
@@ -102,8 +103,21 @@ const getTemplateQuestions = async (req, res) => {
 	});
 };
 
+const getDailyQuestion = async (req, res) => {
+  const questions = await getRandomQuestionWithoutCodeExamples();
+  const questionsWithShuffledAnswers = questions.map(question => {
+    return {
+        ...question,
+        answerOptions: shuffleArray(question.answerOptions)
+    };
+});
+  // Renderizar la página con la pregunta y las opciones
+  res.render('home',  {questionsWithShuffledAnswers});
+};
+
 
 module.exports = {
 	getTemplateQuestions,
-	getFormTemplate
+	getFormTemplate,
+  getDailyQuestion
 };
