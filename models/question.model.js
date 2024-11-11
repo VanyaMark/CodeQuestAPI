@@ -1,6 +1,12 @@
 const { Schema, model } = require('mongoose');
+const { QUESTIONS_CATEGORIES } = require('../utils/constants');
 
 const questionSchema = new Schema({
+	categories: {
+		type: [String],
+		enum: QUESTIONS_CATEGORIES,
+		required: true,
+	},
 	question: {
 		type: String,
 		required: true

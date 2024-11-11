@@ -1,13 +1,15 @@
 const fs = require('fs');
+const { QUESTIONS_CATEGORIES } = require('./constants');
 //const fetch = require('node-fetch');
-
-//Permite pasar parámetors por script. Ej se ejecute. node /nombre_del_archivo URL nombre_fichero_json
+// ** IMPORTANTE - La URL de linkedin-skill-assessments-quizzes debe ser la RAW.
+//Permite pasar parámetors por script. Ej se ejecute. node /nombre_del_archivo URL nombre_fichero_json category
 
 //Ignora los dos primeros parámetro introducidos en línea de comando "node" y "/nombre_del_archivo"
 const args = process.argv.slice(2);
 
 const MARKDOWN_URL = args[0];
 let titulo = args [1];
+let categories = args [2]
 
 // Función asíncrona para descargar el Markdown y llamar a la función que lo convierte a json y lo guarda en un archivo
 async function descargarMarkdown() {
@@ -52,9 +54,12 @@ function convertiraJson(markdown) {
    
     //llama a la funcion crea el array de opciones, poniendo las tres incorrectas primero y la correcta (True) al final
     const answersOptions = getAnswersOptions(correctAnswers, incorrectAnswers);
-    
+    if (!QUESTIONS_CATEGORIES.includes(categories)){
+      categories = 'other'
+    };
     // Crear el objeto
     const question = {
+      categories,
       question: questionText,
       codeExamples,
       answersOptions,
@@ -72,6 +77,7 @@ function convertiraJson(markdown) {
     }
     
     // Guardar el array de objetos en un archivo JSON
+    // To be able to save the file correctly this is what you have to execute in the terminal: node markdownToJson.js RAW  testrawjs
     fs.writeFileSync(`output/${titulo}.json`, JSON.stringify(questions, null, 2));
     console.log(`Se convirtió a JSON y se guardó en ${titulo}.json`);
 }
