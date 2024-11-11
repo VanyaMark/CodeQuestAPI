@@ -7,10 +7,12 @@
 </head>
 
 <body>
-    <%- include('./partials/nav.ejs') %>
+    <nav>
+        <%- include('./partials/nav.ejs') %>
+    </nav>
     <h1>Export Your Questions for Kahoot or Blooket!</h1>
     <p>Create a quiz ready to upload into the most popular game-learning platforms: Kahoot and Blooket</p>
-    <form action="/export-questions" method="GET">
+    <form  action="/export-questions" method="GET">
         <label class="form-step" for="numberQuestions">Step 1. Select the number of questions</label>
         <input type="number" id="numberQuestions" name="numberQuestions" max=20 min="1" required placeholder="1">
         <label class="form-step" for="templateType">Step 2. Choose your favourite platform</label>

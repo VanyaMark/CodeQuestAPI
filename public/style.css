@@ -39,6 +39,7 @@ body {
     z-index: 1000;
   }
   form{
+    color: aliceblue;
     padding-top: 5rem;
     display: flex;
     flex-direction: column;
@@ -67,7 +68,7 @@ body {
   }
   #numberQuestions{
     width: 100px;
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: 600;
     text-align: center;
     font-size: 1rem;
