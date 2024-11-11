@@ -41,6 +41,7 @@ const generateQuestions = async (topic, amount) => {
     for (let i = 0; i < amount; i++) {
         // Call the getQuestionsFromAI function to generate a single question
         const quizData = await getQuestionsFromAI(topic);
+        console.log('QuizData:', quizData);
         // Add the generated question to the questions array with a status of "pending"
         questions.push({
             ...quizData,
