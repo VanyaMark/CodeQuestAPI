@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CodeQuestAPI</title>
+    <%- include('./partials/head.ejs') %>
+</head>
+
+<body>
+    <div id="nav-bar">
+        <%- include('./partials/nav.ejs') %>
+    </div>
+
+    <div class="text-container">
+        <h1 class="pixelated-header">Usage</h1>
+        <div class="examples-container">
+            <div style="margin-bottom: 56px;"">
+          <p class=" pixelated-header">Retrieve A Random Question:</p>
+                <p class="docs-text">
+                    <span style="color: orange; margin-right: 24px">GET</span>
+                    https://api/v1/questions/random
+                </p>
+            </div>
+            <div>
+                <p class="pixelated-header">Example response:</p>
+                <div class="docs-text">
+                    <div>
+                        <p>{ "_id": "6729562b975dcacfbce4b3ed",</p>
+                        <p>
+                            "question": "You are building a user profile page for an
+                            e-commerce website. The user's order history is fetched from the
+                            backend API and displayed on the page. What is the most
+                            appropriate frontend framework method to handle updating the
+                            order history section when a new order is placed?",
+                        </p>
+                        <p>"codeExamples": [ ],</p>
+                        <div>
+                            "answerOptions": [
+                            <div>
+                                { "answer": "Use a setInterval timer to periodically fetch the
+                                updated data from the API.", "isCorrect": false, "_id":
+                                "6729562b975dcacfbce4b3ee" },
+                            </div>
+                            <div>
+                                { "answer": "Implement a WebSocket connection to receive
+                                real-time updates from the backend.", "isCorrect": true,
+                                "_id": "6729562b975dcacfbce4b3ef" },
+                            </div>
+                            <div>
+                                { "answer": "Refresh the entire page using
+                                window.location.reload() after each order.", "isCorrect":
+                                false, "_id": "6729562b975dcacfbce4b3f0" },
+                            </div>
+                            <div>
+                                { "answer": "Manually update the order history DOM elements
+                                after each order using JavaScript.", "isCorrect": false,
+                                "_id": "6729562b975dcacfbce4b3f1" }
+                            </div>
+                            ],
+                        </div>
+                        <p>
+                            "explanation": "Using WebSockets is the most efficient method
+                            for handling real-time updates. WebSockets establish a
+                            persistent connection between the frontend and backend, allowing
+                            for instant data exchange without requiring full page refreshes.
+                            This approach is ideal for scenarios like updating order
+                            history, chat applications, and live dashboards.",
+                        </p>
+                        <p>"status": "pending"</p>
+                        <p>"__v": 0 },</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            navMenu.classList.toggle("show");
+        });
+    </script>
+</body>
+
+</html>

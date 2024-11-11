@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="\style.css">
-    <title>Document</title>
+    <title>CodeQuestAPI</title>
+    <%- include('./partials/head.ejs') %>
 </head>
 
 <body>
+    <%- include('./partials/nav.ejs') %>
     <h1>Export Your Questions for Kahoot or Blooket!</h1>
     <p>Create a quiz ready to upload into the most popular game-learning platforms: Kahoot and Blooket</p>
     <form action="/export-questions" method="GET">

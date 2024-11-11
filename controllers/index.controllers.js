@@ -4,6 +4,30 @@ const path = require("path");
 const { getRandomQuestion, getRandomQuestionWithoutCodeExamples } = require('../services/question.services');
 const { shuffleArray } = require('../utils/utils')
 
+const getHome = async (req, res) => {
+	res.render('home')
+};
+
+const getAboutUs = async (req, res) => {
+	res.render('about-us')
+};
+
+const getDocs = async (req, res) => {
+	res.render('docs')
+};
+
+const getDailyQuestion = async (req, res) => {
+	const questions = await getRandomQuestionWithoutCodeExamples();
+	const questionsWithShuffledAnswers = questions.map(question => {
+		return {
+			...question,
+			answerOptions: shuffleArray(question.answerOptions)
+		};
+	});
+	// Renderizar la página con la pregunta y las opciones
+	res.render('random-question', { questionsWithShuffledAnswers });
+};
+
 const getFormTemplate = async (req, res) => {
 	res.render("template-form", {});
 };
@@ -103,21 +127,12 @@ const getTemplateQuestions = async (req, res) => {
 	});
 };
 
-const getDailyQuestion = async (req, res) => {
-  const questions = await getRandomQuestionWithoutCodeExamples();
-  const questionsWithShuffledAnswers = questions.map(question => {
-    return {
-        ...question,
-        answerOptions: shuffleArray(question.answerOptions)
-    };
-});
-  // Renderizar la página con la pregunta y las opciones
-  res.render('home',  {questionsWithShuffledAnswers});
-};
-
 
 module.exports = {
+	getHome,
+	getAboutUs,
+	getDocs,
 	getTemplateQuestions,
 	getFormTemplate,
-  getDailyQuestion
+	getDailyQuestion
 };
