@@ -10,6 +10,19 @@ const {
   getRandomQuestionWithoutCodeExamples,
 } = require("./services/question.services");
 const { shuffleArray } = require("./utils/utils");
+const cors = require("cors");
+const rateLimit = limit({
+  max: 2, // Maximum 2 requests
+  period: 20 * 1000, // Every 20 seconds
+  onLimitReached: (req, res) => {
+    // Custom response for when the limit is reached
+    res.status(429).json({
+      error: "Too Many Requests",
+      message:
+        "You have reached the maximum number of requests. Please try again later.",
+    });
+  },
+});
 
 dotenv.config();
 
@@ -17,20 +30,22 @@ const app = express();
 app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(cors());
+
 app.use(
   "/",
-  limit({
-    max: 2, // 5 requests
-    period: 60 * 1000, // per minute (60 seconds)
-  }),
+  cors(),
+  rateLimit,
+
   indexRouter
 );
 app.use(
   "/api",
-  limit({
-    max: 2, // 5 requests
-    period: 15 * 1000, // per minute (60 seconds)
+  cors({
+    methods: ["GET"],
+    origin: "*",
   }),
+  rateLimit,
   apiRouter
 );
 app.use(express.static("public"));
