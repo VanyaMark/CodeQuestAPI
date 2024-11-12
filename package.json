@@ -17,6 +17,8 @@
 		"express": "^4.21.1",
 		"mongoose": "^8.7.2",
 		"path": "^0.12.7",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1",
 		"xlsx": "^0.18.5"
 	},
 	"devDependencies": {
