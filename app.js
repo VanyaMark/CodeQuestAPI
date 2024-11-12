@@ -14,7 +14,7 @@ const cors = require("cors");
 
 const limiter = rateLimit({
 	windowMs: 60 * 1000, // 60 seconds
-	limit: 20, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+	limit: 20, // limit each IP to 20 requests per `window` per 60 seconds
 })
 
 dotenv.config();
