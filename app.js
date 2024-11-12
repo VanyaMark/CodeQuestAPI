@@ -12,8 +12,8 @@ const {
 const { shuffleArray } = require("./utils/utils");
 const cors = require("cors");
 const rateLimit = limit({
-  max: 2, // Maximum 2 requests
-  period: 20 * 1000, // Every 20 seconds
+  max: 20, // Maximum 2 requests
+  period: 60 * 1000, // Every 20 seconds
   onLimitReached: (req, res) => {
     // Custom response for when the limit is reached
     res.status(429).json({
@@ -68,20 +68,21 @@ app.get(
 );
 
 app.use("/api/*", (req, res) => {
-  res.status(404).json({ error: "Endpoint Not Found" });
+  res.status(404).render("404", {
+    message: "The page you are looking for does not exist.",
+  });
 });
 
 app.use("*", (req, res) => {
   res.status(404).render("404", {
-    message: "La página que buscas no existe.",
+    message: "The page you are looking for does not exist.",
   });
 });
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).render("500", {
-    message:
-      "Ha ocurrido un error en el servidor. Intenta nuevamente más tarde.",
+    message: "An error has occurred on the server. Try again later.",
   });
 });
 
