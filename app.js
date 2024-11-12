@@ -37,7 +37,7 @@ app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(cors());
-
+app.use(express.static("public"));
 app.options("/api/*", cors({ methods: ["GET"], origin: "*" }));
 app.use("/", rateLimit, indexRouter);
 app.use(
@@ -49,7 +49,6 @@ app.use(
   rateLimit,
   apiRouter
 );
-app.use(express.static("public"));
 
 app.get(
   "/daily-question",
@@ -67,6 +66,24 @@ app.get(
     res.render("home", { questionsWithShuffledAnswers });
   }
 );
+
+app.use("/api/*", (req, res) => {
+  res.status(404).json({ error: "Endpoint Not Found" });
+});
+
+app.use("*", (req, res) => {
+  res.status(404).render("404", {
+    message: "La página que buscas no existe.",
+  });
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render("500", {
+    message:
+      "Ha ocurrido un error en el servidor. Intenta nuevamente más tarde.",
+  });
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
