@@ -136,7 +136,7 @@ const getDailyQuestion = async (req, res) => {
     };
 	});
   // Renderizar la página con la pregunta y las opciones
-  res.render('home',  {questionsWithShuffledAnswers} );
+  res.render('daily-question',  {questionsWithShuffledAnswers} );
 };
 
 const newQuestionForm = (req, res) => {
