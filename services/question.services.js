@@ -72,7 +72,7 @@ const getRandomQuestionsDB = async (amount, filter = {}) => {
     if (typeof amount !== "number" || isNaN(amount) || amount < 0) {
         throw new Error("Amount must be a positive number.");
     }
-   
+
     try {
         // Inicia con la condición de status y agrega cualquier otro filtro pasado como parámetro
         let matchCondition = { status: { $ne: 'pending' }, ...filter };
@@ -80,7 +80,7 @@ const getRandomQuestionsDB = async (amount, filter = {}) => {
             { $match: matchCondition },
             { $sample: { size: amount } },
         ]);
-        
+
         return questions;
     } catch (error) {
         throw new Error("Error fetching random questions from the database.");

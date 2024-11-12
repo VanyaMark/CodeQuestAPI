@@ -23,7 +23,7 @@ const { generateQuestions, getRandomQuestionsDB } = require('../services/questio
  */
 const getRandomQuestions = async (req, res) => {
 	try {
-		let { amount } = req.query;
+		let { amount, categories } = req.query;
 		amount = parseInt(amount, 10);
 
 		//validation of amount
@@ -33,8 +33,10 @@ const getRandomQuestions = async (req, res) => {
 			amount = 30;
 		}
 
-		const randomQuestion = await getRandomQuestionsDB(amount);
-		
+		//const randomQuestion = await getRandomQuestionsDB(amount, {categories : categories});
+		const randomQuestion = categories
+			? await getRandomQuestionsDB(amount, { categories: categories })
+			: await getRandomQuestionsDB(amount);
 
 		res.status(200).json({
 			message: "Random questions delivered successfully",
