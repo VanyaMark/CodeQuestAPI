@@ -27,18 +27,19 @@ const rateLimit = limit({
 dotenv.config();
 
 const app = express();
+
+/* app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  next();
+}); */
+
 app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(cors());
 
-app.use(
-  "/",
-  cors(),
-  rateLimit,
-
-  indexRouter
-);
+app.options("/api/*", cors({ methods: ["GET"], origin: "*" }));
+app.use("/", rateLimit, indexRouter);
 app.use(
   "/api",
   cors({
