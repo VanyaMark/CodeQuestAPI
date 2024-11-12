@@ -12,7 +12,7 @@ const {
 const { shuffleArray } = require("./utils/utils");
 const cors = require("cors");
 const rateLimit = limit({
-  max: 20, // Maximum 20 requests
+  max: 2, // Maximum 12 requests
   period: 60 * 1000, // Every 60 seconds
   onLimitReached: (req, res) => {
     // Custom response for when the limit is reached
