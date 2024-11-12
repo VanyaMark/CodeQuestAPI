@@ -9,12 +9,15 @@ const swaggerDocs = require('./config/swagger.config');
 dotenv.config();
 
 const app = express();
+
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.use("/", indexRouter);
-app.use("/api", apiRouter);
 app.use(express.static('public'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.set('view engine', 'ejs');
+
+app.use("/", indexRouter);
+app.use("/api", apiRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
