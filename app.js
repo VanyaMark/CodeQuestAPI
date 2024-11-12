@@ -12,8 +12,8 @@ const {
 const { shuffleArray } = require("./utils/utils");
 const cors = require("cors");
 const rateLimit = limit({
-  max: 20, // Maximum 2 requests
-  period: 60 * 1000, // Every 20 seconds
+  max: 20, // Maximum 20 requests
+  period: 60 * 1000, // Every 60 seconds
   onLimitReached: (req, res) => {
     // Custom response for when the limit is reached
     res.status(429).json({
@@ -68,8 +68,8 @@ app.get(
 );
 
 app.use("/api/*", (req, res) => {
-  res.status(404).render("404", {
-    message: "The page you are looking for does not exist.",
+  res.status(404).json({
+    message: "Resource not found",
   });
 });
 
