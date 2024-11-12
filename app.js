@@ -1,5 +1,5 @@
 const express = require("express");
-const limit = require("express-limit").limit;
+const { rateLimit } = require ('express-rate-limit')
 const { connectDB } = require("./utils/db");
 const dotenv = require("dotenv");
 const helmet = require("helmet"); // add helmet
@@ -11,27 +11,20 @@ const {
 } = require("./services/question.services");
 const { shuffleArray } = require("./utils/utils");
 const cors = require("cors");
-const rateLimit = limit({
-  max: 2, // Maximum 12 requests
-  period: 60 * 1000, // Every 60 seconds
-  onLimitReached: (req, res) => {
-    // Custom response for when the limit is reached
-    res.status(429).json({
-      error: "Too Many Requests",
-      message:
-        "You have reached the maximum number of requests. Please try again later.",
-    });
-  },
-});
+
+const limiter = rateLimit({
+	windowMs: 60 * 1000, // 60 seconds
+	limit: 20, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+})
 
 dotenv.config();
 
 const app = express();
 
-/* app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   next();
-}); */
+});
 
 app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
@@ -39,16 +32,16 @@ app.set("view engine", "ejs");
 app.use(cors());
 app.use(express.static("public"));
 app.options("/api/*", cors({ methods: ["GET"], origin: "*" }));
-app.use("/", rateLimit, indexRouter);
+
 app.use(
   "/api",
   cors({
     methods: ["GET"],
     origin: "*",
-  }),
-  rateLimit,
+  }), limiter,
   apiRouter
 );
+app.use("/", limiter, indexRouter);
 
 app.get(
   "/daily-question",
