@@ -3,6 +3,7 @@ const { QUESTIONS_CATEGORIES } = require("./constants");
 const createPrompt = (topic) => {
     let categories = topic;
     console.log('Category:', categories);
+
     if (!QUESTIONS_CATEGORIES.includes(topic)) {
         categories = 'other';
     }

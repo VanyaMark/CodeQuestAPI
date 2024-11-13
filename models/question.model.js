@@ -5,14 +5,15 @@ const questionSchema = new Schema({
 	categories: {
 		type: [String],
 		enum: QUESTIONS_CATEGORIES,
-		required: true,
+		required: true
 	},
 	question: {
 		type: String,
 		required: true
 	},
 	codeExamples: {
-		type: [String]
+		type: [String],
+		default:[]
 	},
 	answerOptions: [
 		{
@@ -30,14 +31,8 @@ const questionSchema = new Schema({
 		type: String,
 		maxlength: 4000
 	},
-	status: {
-		type: String,
-		enum: ["approved", "pending"],
-		default: "approved"
-	},
 	urlSource: {
 		type: String
-
 	},
 	status: {
 		type: String,
