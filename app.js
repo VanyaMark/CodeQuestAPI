@@ -2,11 +2,10 @@ const express = require("express");
 const { rateLimit } = require("express-rate-limit");
 const { connectDB } = require("./utils/db");
 const dotenv = require("dotenv");
-const helmet = require("helmet"); // add helmet
+
 const indexRouter = require("./routes/index.routes");
 const apiRouter = require("./routes/api.routes");
 const {
-  getRandomQuestion,
   getRandomQuestionWithoutCodeExamples,
 } = require("./services/question.services");
 const { shuffleArray } = require("./utils/utils");
@@ -26,7 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
