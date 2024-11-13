@@ -25,6 +25,33 @@ app.use((req, res, next) => {
   next();
 });
 
+const helmet = require("helmet");
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: [
+          "'self'",
+          "https://cdn.tailwindcss.com",
+          "https://cdn.jsdelivr.net",
+          "https://cdnjs.cloudflare.com",
+          "https://fonts.googleapis.com",
+          "'unsafe-inline'",
+        ],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        scriptSrc: [
+          "'self'",
+          "https://cdn.tailwindcss.com",
+          "'unsafe-eval'",
+          "'unsafe-inline'",
+        ],
+      },
+    },
+  })
+);
+
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
