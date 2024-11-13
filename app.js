@@ -42,23 +42,6 @@ app.use(
 );
 app.use("/", limiter, indexRouter);
 
-app.get(
-  "/daily-question",
-
-  async (req, res) => {
-    // Obtener la pregunta correspondiente al día
-    const questions = await getRandomQuestionWithoutCodeExamples();
-    const questionsWithShuffledAnswers = questions.map((question) => {
-      return {
-        ...question,
-        answerOptions: shuffleArray(question.answerOptions),
-      };
-    });
-    // Renderizar la página con la pregunta y las opciones
-    res.render("home", { questionsWithShuffledAnswers });
-  }
-);
-
 app.use("/api/*", (req, res) => {
   res.status(404).json({
     message: "Resource not found",
