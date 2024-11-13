@@ -1,5 +1,5 @@
 const express = require("express");
-const { rateLimit } = require ('express-rate-limit')
+const { rateLimit } = require("express-rate-limit");
 const { connectDB } = require("./utils/db");
 const dotenv = require("dotenv");
 const helmet = require("helmet"); // add helmet
@@ -13,9 +13,9 @@ const { shuffleArray } = require("./utils/utils");
 const cors = require("cors");
 
 const limiter = rateLimit({
-	windowMs: 60 * 1000, // 60 seconds
-	limit: 20, // limit each IP to 20 requests per `window` per 60 seconds
-})
+  windowMs: 60 * 1000, // 60 seconds
+  limit: 20, // limit each IP to 20 requests per `window` per 60 seconds
+});
 
 dotenv.config();
 
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use(helmet()); //use helmet to all routes
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-app.use(cors());
+
 app.use(express.static("public"));
 app.options("/api/*", cors({ methods: ["GET"], origin: "*" }));
 
@@ -38,7 +38,8 @@ app.use(
   cors({
     methods: ["GET"],
     origin: "*",
-  }), limiter,
+  }),
+  limiter,
   apiRouter
 );
 app.use("/", limiter, indexRouter);
