@@ -8,8 +8,8 @@ const { QUESTIONS_CATEGORIES } = require('./constants');
 const args = process.argv.slice(2);
 
 const MARKDOWN_URL = args[0];
-let titulo = args [1];
-let categories = args [2]
+let titulo = args[1];
+let categories = args[2]
 
 // Función asíncrona para descargar el Markdown y llamar a la función que lo convierte a json y lo guarda en un archivo
 async function descargarMarkdown() {
@@ -19,7 +19,7 @@ async function descargarMarkdown() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const markdown = await response.text();
-    
+
     convertiraJson(markdown);
   } catch (error) {
     console.error('Error:', error);
@@ -30,7 +30,7 @@ async function descargarMarkdown() {
 function convertiraJson(markdown) {
   const questions = [];
   let match;
-  
+
   // Expresiones regulares para extraer acada parte del documento desde formato markdown que se utiliza en las preguntas de LinkedIn 
 
   const titleRegex = /^## (.+)$/gm; // Obtener los títulos que en nuestra API serán las categorias (de momento  NO LO USAMOS). Es uno por documento. Ejemplo: JS, CSS, HTML, etc
@@ -39,22 +39,22 @@ function convertiraJson(markdown) {
   const correctAnswerRegex = /- \[x\] (.+)/g; // Respuesta correcta
   const incorrectAnswerRegex = /- \[ \] (.+)/g; // Respuestas erróneas
 
- 
-  
+
+
   // Procesar cada bloque de preguntas
   while ((match = questionRegex.exec(markdown)) !== null) {
     const questionBlock = match[0]; // Bloque de preguntas
     let questionText = questionBlock.replace(/#### Q\d+\s*./, '').split('\n')[0].trim(); // Quitar la primera parte
-    
+
     // Bloques de código
     const codeExamples = [...questionBlock.matchAll(codeExamplesRegex)].map(m => m[1]); // Bloque de ejercicios en preguntas
     // Opciones
     const correctAnswers = [...questionBlock.matchAll(correctAnswerRegex)].map(m => m[1]);
     const incorrectAnswers = [...questionBlock.matchAll(incorrectAnswerRegex)].map(m => m[1]);
-   
+
     //llama a la funcion crea el array de opciones, poniendo las tres incorrectas primero y la correcta (True) al final
     const answersOptions = getAnswersOptions(correctAnswers, incorrectAnswers);
-    if (!QUESTIONS_CATEGORIES.includes(categories)){
+    if (!QUESTIONS_CATEGORIES.includes(categories)) {
       categories = 'other'
     };
     // Crear el objeto
@@ -64,33 +64,33 @@ function convertiraJson(markdown) {
       codeExamples,
       answersOptions,
       urlFont: MARKDOWN_URL
-    
+
     };
 
     questions.push(question); // Añadimos al array
   }
 
-    //Crea la carpeta ListaJson si no existe
-    const path = 'output';
-    if (!fs.existsSync(path)) {
-      fs.mkdirSync(path);
-    }
-    
-    // Guardar el array de objetos en un archivo JSON
-    // To be able to save the file correctly this is what you have to execute in the terminal: node markdownToJson.js RAW  testrawjs
-    fs.writeFileSync(`output/${titulo}.json`, JSON.stringify(questions, null, 2));
-    console.log(`Se convirtió a JSON y se guardó en ${titulo}.json`);
+  //Crea la carpeta ListaJson si no existe
+  const path = 'output';
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path);
+  }
+
+  // Guardar el array de objetos en un archivo JSON
+  // To be able to save the file correctly this is what you have to execute in the terminal: node markdownToJson.js RAW  testrawjs
+  fs.writeFileSync(`output/${titulo}.json`, JSON.stringify(questions, null, 2));
+  console.log(`Se convirtió a JSON y se guardó en ${titulo}.json`);
 }
 
-  //funcion que crea el array de opciones, poniendo las tres incorreectas primero y la correcta (True) al final
-  function getAnswersOptions (correctAnswers, incorrectAnswers){
-    const answersOptions = incorrectAnswers.map( a => {return{answer: a, isCorrect: false}}).concat(correctAnswers.map( a => {return{answer: a, isCorrect: true}}));
+//funcion que crea el array de opciones, poniendo las tres incorreectas primero y la correcta (True) al final
+function getAnswersOptions(correctAnswers, incorrectAnswers) {
+  const answersOptions = incorrectAnswers.map(a => { return { answer: a, isCorrect: false } }).concat(correctAnswers.map(a => { return { answer: a, isCorrect: true } }));
 
-    return answersOptions
-  };
+  return answersOptions
+};
 
 
-  
+
 
 
 // Ejecutar la descarga y conversión
