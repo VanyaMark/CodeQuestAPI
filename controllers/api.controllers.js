@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const {
   generateQuestions,
-  getRandomQuestion,
+  getRandomQuestionsDB,
 } = require("../services/question.services");
 
 /**
@@ -36,7 +36,7 @@ const getRandomQuestions = async (req, res) => {
       amount = 30;
     }
 
-    const randomQuestion = await getRandomQuestion(amount);
+    const randomQuestion = await getRandomQuestionsDB(amount);
 
     res.status(200).json({
       message: "Random questions delivered successfully",
