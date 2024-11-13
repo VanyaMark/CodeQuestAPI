@@ -5,7 +5,7 @@ const questionSchema = new Schema({
 	categories: {
 		type: [String],
 		enum: QUESTIONS_CATEGORIES,
-		required: true
+		default: ['other']
 	},
 	question: {
 		type: String,
