@@ -57,7 +57,7 @@ const jsonFile = {
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Pet"
+                                        "$ref": "#/components/schemas/Question"
                                     }
                                 }
                             }
@@ -246,7 +246,7 @@ const jsonFile = {
                     "name": "tag"
                 }
             },
-            "Pet": {
+            "Question": {
                 "required": [
                     "name",
                     "photoUrls"
@@ -260,7 +260,7 @@ const jsonFile = {
                     },
                     "name": {
                         "type": "string",
-                        "example": "doggie"
+                        "example": "Balam"
                     },
                     "category": {
                         "$ref": "#/components/schemas/Category"

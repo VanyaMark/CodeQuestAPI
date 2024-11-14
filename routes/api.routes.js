@@ -68,6 +68,7 @@ const apiControllers = require('../controllers/api.controllers');
  */
 router.get('/v1/questions/random', apiControllers.getRandomQuestions);
 
+router.get('/v1/test-swagger', apiControllers.getTestSwaggerOption)
 
 /** 
  * @swagger 

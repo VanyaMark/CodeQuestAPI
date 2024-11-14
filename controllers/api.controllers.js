@@ -2,6 +2,7 @@ const xlsx = require("xlsx");
 const fs = require("fs");
 const path = require("path");
 const { generateQuestions, getRandomQuestionsDB } = require('../services/question.services');
+const jsonFile = require("../config/test.js")
 
 
 /**
@@ -77,8 +78,12 @@ const getAiQuestions = async (req, res) => {
 	}
 };
 
+const getTestSwaggerOption = async(req, res) => {
+	res.json(jsonFile)
+};
 
 module.exports = {
 	getRandomQuestions,
-	getAiQuestions
+	getAiQuestions,
+	getTestSwaggerOption
 };
