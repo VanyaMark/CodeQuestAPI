@@ -77,7 +77,5 @@ router.get('/v1/questions/random', apiControllers.getRandomQuestions);
 */
 router.get('/v1/questions/ai', apiControllers.getAiQuestions) 
 
-router.get('/v1/test-swagger', apiControllers.getTestSwaggerOption)
-
 module.exports = router;
 

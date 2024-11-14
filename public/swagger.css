@@ -1,0 +1,30 @@
+.flex{
+    display: flex;
+
+}
+.opblock-summary-control{
+    background-color: blueviolet;
+}
+#swagger-ui > div > div:nth-child(2) > div.information-container.wrapper > section > div > div > hgroup > h2{
+    color: #41fd5b;
+    font-family: "Press Start 2P", system-ui;
+    text-shadow: 2px 2px 4px rgb(0,0,0);
+}
+#swagger-ui > div > div:nth-child(2){
+    border: #41fd5b solid 2px;
+    border-radius: 15px;
+    margin: 3rem;
+    background-color: rgba(255, 255, 255, 0.25)
+}
+#swagger-ui > div > div:nth-child(2) > div.information-container.wrapper > section > div > div > div.description > div > p:nth-child(1){
+    color: #41fd5b;
+}
+#swagger-ui > div > div:nth-child(2) > div.information-container.wrapper > section > div > div > hgroup > a > span{
+    color: black;
+}
+
+#swagger-ui > div > div:nth-child(2) > div:nth-child(4),
+#swagger-ui > div > div:nth-child(2) > div:nth-child(5)
+{
+    background-color: white;
+}

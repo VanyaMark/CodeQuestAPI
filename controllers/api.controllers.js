@@ -2,7 +2,7 @@ const xlsx = require("xlsx");
 const fs = require("fs");
 const path = require("path");
 const { generateQuestions, getRandomQuestionsDB } = require('../services/question.services');
-const testSwaggerDocs = require("../config/test-swagger.config");
+
 
 /**
  * Get random questions from the service.
@@ -78,12 +78,7 @@ const getAiQuestions = async (req, res) => {
 };
 
 
-const getTestSwaggerOption = async(req, res) => {
-	res.json(testSwaggerDocs)
-}
-
 module.exports = {
 	getRandomQuestions,
-	getAiQuestions,
-	getTestSwaggerOption
+	getAiQuestions
 };
