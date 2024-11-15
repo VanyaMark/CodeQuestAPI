@@ -183,6 +183,7 @@ header {
   align-items: center;
   justify-content: center;
   width: 100vw;
+  height: 50vh;
   /* height: calc(100vh - 70px); */
   position: relative;
 }
@@ -197,12 +198,31 @@ header {
   flex-direction: column;
   align-items: center;
 }
-
+.home-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  height: 25vh;
+  margin: 0 10%;
+}
+.home-text a:hover{
+  font-weight: 600;
+  text-decoration: underline;
+}
 .image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 30px 100px 0 100px;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
 }
 
 /* The typing effect */
