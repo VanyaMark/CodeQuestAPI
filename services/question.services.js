@@ -1,6 +1,7 @@
 const Questions = require('../models/question.model');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { createPrompt } = require("../utils/aiPrompt")
+const { createPrompt } = require("../utils/aiPrompt");
+const { QUESTIONS_CATEGORIES } = require('../utils/constants');
 
 
 // Function to generate a multiple-choice question using the AI model
@@ -52,9 +53,13 @@ const generateQuestions = async (topic, amount) => {
     for (let i = 0; i < amount; i++) {
         // Call the getQuestionsFromAI function to generate a single question
         const quizData = await getQuestionsFromAI(topic);
+        console.log('QuizData:', quizData);
+        let {categories} = quizData; 
+        categories = QUESTIONS_CATEGORIES.includes(categories)?categories:'other';
         // Add the generated question to the questions array with a status of "pending"
         questions.push({
             ...quizData,
+            categories,
             status: "pending",
         });
     }
@@ -71,7 +76,7 @@ const getRandomQuestionsDB = async (amount, filter = {}) => {
     if (typeof amount !== "number" || isNaN(amount) || amount < 0) {
         throw new Error("Amount must be a positive number.");
     }
-   
+
     try {
         // Inicia con la condición de status y agrega cualquier otro filtro pasado como parámetro
         let matchCondition = { status: { $ne: 'pending' }, ...filter };
@@ -79,7 +84,7 @@ const getRandomQuestionsDB = async (amount, filter = {}) => {
             { $match: matchCondition },
             { $sample: { size: amount } },
         ]);
-        
+
         return questions;
     } catch (error) {
         throw new Error("Error fetching random questions from the database.");
