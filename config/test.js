@@ -1,7 +1,7 @@
 const jsonFile = {
     "openapi": "3.0.2",
     "info": {
-        "title": "CodeQuestAPI - OpenAPI 3.0",
+        "title": "CodeQuestAPI",
         "description": "This project provides a REST API for accessing a collection of programming questions.\n It allows users to retrieve questions based on various categories, difficulty levels, and tags.\n The API supports search, filtering, and sorting features to help developers find the right questions for practice or assessment.\n All data is served in JSON format, ensuring easy integration with other applications or platforms.",
         "contact": {
             "email": "codequestapi@gmail.com"
@@ -21,13 +21,13 @@ const jsonFile = {
             "url": "/api/v1"
         }
     ],
-    "tags": [
-        {
-            "name": "question",
-            "description": "Questions about programming",
-        },
+    // "tags": [
+    //     {
+    //         "name": "question",
+    //         "description": "Questions about programming",
+    //     },
 
-    ],
+    // ],
     "paths": {
         "/questions/random": {
             "get": {
