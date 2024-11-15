@@ -217,14 +217,15 @@ header {
   align-items: center;
   margin: 30px 100px 0 100px;
 }
-
+.flex{
+  justify-content: center;
+}
 .flex-row{
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2rem;
 }
-
 /* The typing effect */
 @keyframes typing {
   from {
