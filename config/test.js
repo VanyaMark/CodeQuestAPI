@@ -165,11 +165,6 @@ const jsonFile = {
                             },
                         }],
                     },
-                    "explanation": {
-                        "type": "string",
-                        "example": "A lightweight data-interchange format that uses human-readable text to transmit data objects consisting of attribute-value pairs. It is easy for humans to read and write. It is easy for machines to parse and generate. It is based on a subset of the JavaScript programming language. Standard for data interchange on the web.",
-                        "maxlength": 4000
-                    },
                     "urlSource": {
                         "type": "string",
                         "example": "https://www.atatus.com/blog/parsing-php-data-with-json-encode-and-decode-functions/"
