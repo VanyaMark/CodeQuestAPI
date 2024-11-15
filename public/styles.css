@@ -177,13 +177,18 @@ header {
 
 .typewriter-container {
   display: none;
+
   /* Hidden initially */
   width: fit-content;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100vh - 70px);
+  /* height: calc(100vh - 70px); */
   position: relative;
+}
+.typewriter-container::after{
+  display: flex;
+  flex-direction: column;
 }
 
 .text-container {

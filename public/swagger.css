@@ -5,6 +5,9 @@
 .opblock-summary-control{
     background-color: blueviolet;
 }
+#swagger-ui > div > div:nth-child(2) > div.information-container.wrapper > section > div > div > hgroup > a > span{
+    display: none;
+}
 #swagger-ui > div > div:nth-child(2) > div.information-container.wrapper > section > div > div > hgroup > h2{
     color: #41fd5b;
     font-family: "Press Start 2P", system-ui;

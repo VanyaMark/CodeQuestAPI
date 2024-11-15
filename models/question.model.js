@@ -31,13 +31,7 @@ const questionSchema = new Schema({
 	},
 	urlSource: {
 		type: String
-
 	},
-	status: {
-		type: String,
-		enum: ["approved", "pending"],
-		default: "approved"
-	}
 });
 
 const Questions = model('question', questionSchema);
